@@ -1,0 +1,195 @@
+openapi: 3.0.3
+info:
+  title: Weather Monitor API
+  description: Backend proxy for the Open-Meteo geocoding and forecast APIs.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3333
+paths:
+  /weather:
+    get:
+      summary: Get the current weather and 7-day forecast for a city
+      parameters:
+        - name: city
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Name of the city to search for
+      responses:
+        "200":
+          description: Weather data found successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WeatherResponse"
+        "400":
+          description: Missing or invalid 'city' query parameter
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: City not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "502":
+          description: Failed to reach the Open-Meteo API
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /cities:
+    get:
+      summary: Search city suggestions for autocomplete
+      parameters:
+        - name: search
+          in: query
+          required: true
+          schema:
+            type: string
+            minLength: 2
+          description: Partial city name to search for
+      responses:
+        "200":
+          description: List of matching city suggestions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CitySuggestion"
+        "400":
+          description: Missing or too short 'search' query parameter
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "502":
+          description: Failed to reach the Open-Meteo API
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    CitySuggestion:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        country:
+          type: string
+        admin1:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+    CityLocation:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        country:
+          type: string
+        countryCode:
+          type: string
+        admin1:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        timezone:
+          type: string
+    WeatherCondition:
+      type: object
+      properties:
+        code:
+          type: integer
+        label:
+          type: string
+        icon:
+          type: string
+          enum:
+            - clear-day
+            - clear-night
+            - partly-cloudy-day
+            - partly-cloudy-night
+            - cloudy
+            - fog
+            - drizzle
+            - rain
+            - freezing-rain
+            - snow
+            - thunderstorm
+    CurrentWeather:
+      type: object
+      properties:
+        temperature:
+          type: number
+        apparentTemperature:
+          type: number
+        humidity:
+          type: number
+        windSpeed:
+          type: number
+        uvIndex:
+          type: number
+        precipitationProbability:
+          type: number
+        isDay:
+          type: boolean
+        condition:
+          $ref: "#/components/schemas/WeatherCondition"
+    DailyForecastDay:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        temperatureMin:
+          type: number
+        temperatureMax:
+          type: number
+        uvIndexMax:
+          type: number
+        precipitationProbability:
+          type: number
+        condition:
+          $ref: "#/components/schemas/WeatherCondition"
+    WeatherResponse:
+      type: object
+      properties:
+        city:
+          $ref: "#/components/schemas/CityLocation"
+        current:
+          $ref: "#/components/schemas/CurrentWeather"
+        daily:
+          type: array
+          items:
+            $ref: "#/components/schemas/DailyForecastDay"
