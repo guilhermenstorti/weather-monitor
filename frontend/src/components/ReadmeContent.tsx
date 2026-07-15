@@ -33,7 +33,13 @@ const MarkdownLink = ({ href, children, node: _node, ...nativeAnchorProps }: Mar
 };
 
 export const ReadmeContent = () => (
-  <div className="prose prose-slate max-w-none prose-headings:scroll-mt-4">
+  <div
+    className={
+      "prose prose-slate max-w-none overflow-x-hidden prose-headings:scroll-mt-4 " +
+      "prose-table:table-fixed prose-th:break-words prose-th:align-top prose-th:text-sm " +
+      "prose-td:break-words prose-td:align-top prose-td:text-sm"
+    }
+  >
     <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSlug]} components={{ a: MarkdownLink }}>
       {readmeMarkdown}
     </ReactMarkdown>
