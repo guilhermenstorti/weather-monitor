@@ -4,7 +4,7 @@ Personal study project on practical software development with the aid of LLMs in
 
 - **Author:** Guilherme Storti 
 - **Github:** [guilhermenstorti](https://github.com/guilhermenstorti)
-- **Linkedin:** [guilhermenstorti](https://www.linkedin.com/in/guilherme-navakoski-storti/)
+- **Linkedin:** [/guilherme-navakoski-storti](https://www.linkedin.com/in/guilherme-navakoski-storti/)
 - **Live Demo:** [guilhermenstorti.github.io/weather-monitor](https://guilhermenstorti.github.io/weather-monitor/)
 
 ---
