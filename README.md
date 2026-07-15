@@ -2,7 +2,10 @@
 
 Personal study project on practical software development with the aid of LLMs in a disciplined manner, using a custom harness layer (general rules + specific skills + agnostic approach to LLM communication) to guide the AI before any line of code is written. The goal was not just to build a functional "weather dashboard" (frontend + backend consuming the Open-Meteo API), but mainly to test how far it is possible to guide a code assistant (in this case, Claude Code) with an explicit and reusable set of engineering rules, instead of relying solely on the model's implicit common sense.
 
-**Live Demo:** [guilhermenstorti.github.io/weather-monitor](https://guilhermenstorti.github.io/weather-monitor/)
+- **Author:** Guilherme Storti 
+- **Github:** [guilhermenstorti](https://github.com/guilhermenstorti)
+- **Linkedin:** [guilhermenstorti](https://www.linkedin.com/in/guilherme-navakoski-storti/)
+- **Live Demo:** [guilhermenstorti.github.io/weather-monitor](https://guilhermenstorti.github.io/weather-monitor/)
 
 ---
 
