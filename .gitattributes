@@ -1,0 +1,13 @@
+# Normalize all text files to LF line endings, regardless of the
+# contributor's OS or local core.autocrlf setting.
+* text=auto eol=lf
+
+# Common binary types are never subject to line-ending conversion.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary

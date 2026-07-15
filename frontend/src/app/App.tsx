@@ -1,3 +1,8 @@
 import { WeatherPage } from "../pages/WeatherPage";
+import { AppShell } from "./AppShell";
 
-export const App = () => <WeatherPage />;
+export const App = () => (
+  <AppShell>
+    <WeatherPage />
+  </AppShell>
+);
